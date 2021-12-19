@@ -36,7 +36,7 @@ const Persons = (props) => {
           )
           .catch(error => {
             console.log("fail")
-            setAddText("Information about this person is already deleted")
+            props.setAddText("Information about this person is already deleted")
           })
       }}>Delete</button></li>
     )
