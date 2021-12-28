@@ -41,7 +41,7 @@ mongoose.connect(url)
 
 
 
-app.get('/', morgan(':body'), (request, response) => {
+app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
 })
 
