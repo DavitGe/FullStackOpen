@@ -1,30 +1,31 @@
 {
-  "name": "blog_list",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "start": "cross-env NODE_ENV=production node index.js",
-    "lint": "eslint .",
-    "dev": "cross-env NODE_ENV=development nodemon index.js"
-  },
-  "author": "me",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.2",
-    "mongoose-unique-validator": "^3.0.0",
-    "supertest": "^6.1.6"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "eslint": "^8.5.0",
-    "jest": "^27.4.5",
-    "nodemon": "^2.0.15"
-  }
+    "name": "blog_list",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+        "start": "cross-env NODE_ENV=production node index.js",
+        "lint": "eslint .",
+        "dev": "cross-env NODE_ENV=development nodemon index.js",
+        "start:test": "cross-env NODE_ENV=test node index.js"
+    },
+    "author": "me",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.2",
+        "mongoose-unique-validator": "^3.0.0",
+        "supertest": "^6.1.6"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "eslint": "^8.5.0",
+        "jest": "^27.4.5",
+        "nodemon": "^2.0.15"
+    }
 }

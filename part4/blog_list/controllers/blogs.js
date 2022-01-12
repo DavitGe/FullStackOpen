@@ -19,15 +19,14 @@ blogsRouter.get('/:id', async (request, response) => {
     }
 })
 
-blogsRouter.post('/', userExtractor, async (request, response) => {
+blogsRouter.post('/', async (request, response) => {
     const body = request.body
-    const user = await User.findById(request.user.id)
-
+    const user = await User.findOne({ username: body.author })
     const blog = new Blog({
         title: body.title,
         url: body.url,
-        likes: body.likes,
-        author: user._id,
+        likes: 0,
+        author: user.id,
     })
 
     const savedBlog = await blog.save()
@@ -37,17 +36,17 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
     response.json(savedBlog)
 })
 
-blogsRouter.delete('/:id', userExtractor, async (request, response) => {
+blogsRouter.delete('/:id', async (request, response) => {
     const id = request.params.id
     const blog = await Blog.findById(id)
 
-    if (!(request.token || request.user.id)) {
-        return response.status(401).json({ error: 'token missing or invalid' })
-    }
+    const body = request.body
+    console.log('body', body)
+    const user = await User.findOne({ username: body.author })
+    console.log('user', user)
     if (!blog) {
         return response.status(204).json({ message: "blog is not existing" })
-    }
-    if (blog.author.toString() === request.user.id.toString()) {
+    } else {
         await Blog.findByIdAndRemove(id)
         return response.status(204).end()
     }
