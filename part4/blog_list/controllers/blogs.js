@@ -27,6 +27,7 @@ blogsRouter.post('/', async (request, response) => {
         url: body.url,
         likes: 0,
         author: user.id,
+        comments: []
     })
 
     const savedBlog = await blog.save()
@@ -40,14 +41,15 @@ blogsRouter.delete('/:id', async (request, response) => {
     const id = request.params.id
     const blog = await Blog.findById(id)
 
-    const body = request.body
-    console.log('body', body)
-    const user = await User.findOne({ username: body.author })
-    console.log('user', user)
+    const user = await User.findById(blog.author)
     if (!blog) {
         return response.status(204).json({ message: "blog is not existing" })
     } else {
         await Blog.findByIdAndRemove(id)
+        const blogsList = await user.blogs.filter(id => id.toString() !== blog.id.toString())
+        user.blogs = blogsList
+        await user.save()
+
         return response.status(204).end()
     }
 })
@@ -67,6 +69,19 @@ blogsRouter.put('/:id', (request, response) => {
             }
 
         })
+})
+
+blogsRouter.post('/:id', async (request, response) => {
+    const blog = await Blog.findById(request.params.id)
+    const body = request.body
+    if (!blog) {
+        console.error('Wrong ID')
+    } else {
+        blog.comments = [...blog.comments, body.comment]
+        await blog.save()
+        response.status(201).end()
+    }
+
 })
 
 
