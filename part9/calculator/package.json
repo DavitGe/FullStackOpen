@@ -1,0 +1,33 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "ts-node": "ts-node",
+    "calculateBMI": "ts-node calculateBMI",
+    "exerciseCalculator": "ts-node exerciseCalculator.ts",
+    "dev": "ts-node-dev index.ts",
+    "start": "ts-node index.ts",
+    "lint": "eslint --ext .ts ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.17",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^1.1.8"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "lodash": "^4.17.21"
+  }
+}
