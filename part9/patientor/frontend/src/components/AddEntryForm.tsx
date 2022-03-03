@@ -25,19 +25,19 @@ interface option {
 const AddEntryForm = (props: any) => {
   const [diagnosis, setDiagnosis] = useState<option[]>([]);
 
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState<Date | undefined | Date[] | null>();
   const [specialist, setSpecialist] = useState<string>("");
   const [diagnosisCodes, setDiagnosisCodes] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
   const [rating, setRating] = useState<number>(1);
   const [sickLeave, setSickLeave] = useState<{
-    startDate: string;
-    endDate: string;
-  }>({ startDate: "", endDate: "" });
+    startDate: Date | undefined | Date[] | null;
+    endDate: Date | undefined | Date[] | null;
+  }>({ startDate: null, endDate: null });
   const [discharge, setDischarge] = useState<{
-    date: string;
+    date: Date | undefined | Date[] | null;
     criteria: string;
-  }>({ date: "", criteria: "" });
+  }>({ date: null, criteria: "" });
 
   useEffect(() => {
     let temp: option[] = [];
@@ -95,25 +95,25 @@ const AddEntryForm = (props: any) => {
             <SemanticDatepicker
               placeholder="Date..."
               value={date}
-              onChange={(e, data) => setDate(data.value)}
+              onChange={(_e, data) => {
+                setDate(data.value);
+              }}
             />
           </Form.Field>
-          <Form.Field style={{ display: "flex" }}>
+          <Form.Field>
             <SemanticDatepicker
               placeholder="Start Date"
               value={sickLeave.startDate}
-              onChange={(e) =>
-                setSickLeave({ ...sickLeave, startDate: e.target.value })
+              onChange={(_e, data) =>
+                setSickLeave({ ...sickLeave, startDate: data.value })
               }
-              style={{ marginRight: "6px" }}
             />
             <SemanticDatepicker
               placeholder="End Date"
               value={sickLeave.endDate}
-              onChange={(e) =>
-                setSickLeave({ ...sickLeave, endDate: e.target.value })
+              onChange={(_e, data) =>
+                setSickLeave({ ...sickLeave, endDate: data.value })
               }
-              style={{ marginLeft: "6px" }}
             />
           </Form.Field>
           <Form.Field>
@@ -171,7 +171,7 @@ const AddEntryForm = (props: any) => {
             <SemanticDatepicker
               placeholder="Date..."
               value={date}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(_e, data) => setDate(data.value)}
             />
           </Form.Field>
           <Form.Field>
@@ -263,7 +263,7 @@ const AddEntryForm = (props: any) => {
             <SemanticDatepicker
               placeholder="Date..."
               value={date}
-              onChange={({ target }) => setDate(target.value)}
+              onChange={(_e, data) => setDate(data.value)}
             />
           </Form.Field>
           <Form.Field style={{ display: "flex" }}>
@@ -272,10 +272,9 @@ const AddEntryForm = (props: any) => {
               <SemanticDatepicker
                 placeholder="Date..."
                 value={discharge.date}
-                onChange={(e) =>
-                  setDischarge({ ...discharge, date: e.target.value })
+                onChange={(_e, data) =>
+                  setDischarge({ ...discharge, date: data.value })
                 }
-                style={{ marginRight: "6px" }}
               />
             </Container>
             <Container>
@@ -286,7 +285,6 @@ const AddEntryForm = (props: any) => {
                 onChange={(e) =>
                   setDischarge({ ...discharge, criteria: e.target.value })
                 }
-                style={{ marginLeft: "6px" }}
               />
             </Container>
           </Form.Field>

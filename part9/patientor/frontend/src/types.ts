@@ -12,33 +12,33 @@ export enum Gender {
 
 export interface HospitalEntry {
   id: string;
-  date: string;
+  date: Date;
   type: "Hospital";
   specialist: string;
   diagnosisCodes?: Array<Diagnosis["code"]>;
   description: string;
   discharge: {
-    date: string;
+    date: Date;
     criteria: string;
   };
 }
 
 export interface OccupationalHealthcareEntry {
   id: string;
-  date: string;
+  date: Date;
   type: "OccupationalHealthcare";
   specialist: string;
   diagnosisCodes?: Array<Diagnosis["code"]>;
   description: string;
   sickLeave: {
-    startDate: string;
-    endDate: string;
+    startDate: Date;
+    endDate: Date;
   };
 }
 
 export interface HealthCheckEntry {
   id: string;
-  date: string;
+  date: Date;
   type: "HealthCheck";
   specialist: string;
   description: string;
