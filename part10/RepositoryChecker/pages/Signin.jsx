@@ -4,12 +4,18 @@ import {
   Pressable,
   StyleSheet,
   Dimensions,
+  Alert,
 } from 'react-native'
+
 import * as yup from 'yup'
+import useSignIn from '../hooks/useSignIn'
 import { useField, Formik } from 'formik'
+
 import theme from '../styles/theme'
 import Text from '../styles/Text'
 
+import { useMutation } from '@apollo/client'
+import { AUTHENTICATE } from '../graphql/mutations'
 const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
@@ -111,13 +117,32 @@ const SigninForm = ({ onSubmit }) => {
 }
 
 const Signin = () => {
-  const onSubmit = (values) => {
-    const username = values.username
-    const password = values.password
+  // const [signIn] = useSignIn()
+  const [authenticate, result] = useMutation(AUTHENTICATE)
+  const onSubmit = async (values) => {
+    const { username, password } = values
+    console.log('=========STARTING=======')
+    ///////////////////////////
+    // try {
+    //   console.log('username (front)', username)
+    //   console.log('password (front)', password)
+    //   const result = await signIn({ username: username, password: password })
+    //   console.log('========DATA START=========')
+    //   console.log(result)
+    //   console.log('========DATA END===========')
+    // } catch (e) {
+    //   console.log('========error========')
+    //   console.log(e)
+    // }
 
-    if (username !== '' && password !== '') {
-      console.log('username', username)
-      console.log('password', password)
+    //test code
+    try {
+      const res = await authenticate({
+        credentials: { username: username, password: password },
+      })
+      console.log('result', res)
+    } catch (e) {
+      console.log('error', e)
     }
   }
   return (
