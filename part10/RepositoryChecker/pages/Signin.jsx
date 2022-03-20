@@ -119,6 +119,7 @@ const SigninForm = ({ onSubmit }) => {
 const Signin = () => {
   // const [signIn] = useSignIn()
   const [authenticate, result] = useMutation(AUTHENTICATE)
+
   const onSubmit = async (values) => {
     const { username, password } = values
     console.log('=========STARTING=======')
@@ -137,9 +138,9 @@ const Signin = () => {
 
     //test code
     try {
-      const res = await authenticate({
-        credentials: { username: username, password: password },
-      })
+      const credentials = { username: username, password: password }
+      console.log('credentials', credentials)
+      const res = await authenticate(credentials)
       console.log('result', res)
     } catch (e) {
       console.log('error', e)
